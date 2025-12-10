@@ -10,7 +10,7 @@
 5- [ ] Registro de acessos (Cada clique no link curto deve registrar data/hora do acesso).
 
 ## Requisitos do Sistema
-#### Criar link encurtado
+### Criar link encurtado
 Recebe URL original.
 
 Gera código curto.
@@ -19,7 +19,7 @@ Salva no banco.
 
 Retorna link encurtado final.
 
-#### Redirecionar a partir do código
+### Redirecionar a partir do código
 Recebe /:codigo.
 
 Busca a URL original.
@@ -28,39 +28,39 @@ Atualiza estatísticas.
 
 Redireciona.
 
-#### Validar URL informada
+### Validar URL informada
 Não permite salvar URLs mal-formadas.
 
-#### Registrar estatísticas de acesso
+### Registrar estatísticas de acesso
 Data/hora.
 
 Contador total.
 
-#### Consultar métricas detalhadas
+### Consultar métricas detalhadas
 Acessos por data.
 
 Número total de cliques.
 
-#### Deletar link encurtado
+### Deletar link encurtado
 Remove o link ou marca como inativo.
 
-#### Expiração opcional
+### Expiração opcional
 Se existir data de expiração, bloquear o link após o prazo.
 
 ## Requisitos Não Funcionais
-#### Alta disponibilidade
+### Alta disponibilidade
 Redirecionamento deve ser rápido (ideal < 50ms).
 
-#### Código curto amigável
+### Código curto amigável
 Deve ter entre 5 e 10 caracteres.
 
 Pode ser numérico, alfanumérico ou base62.
 
-## RNF03 — Persistência
+### RNF03 — Persistência
 Banco deve garantir consulta rápida.
 
-## Segurança
+### Segurança
 Proteger API de criação com autenticação (JWT).
 
-## Escalabilidade
+### Escalabilidade
 Redirecionamento deve suportar alto volume de requisições simultâneas.
