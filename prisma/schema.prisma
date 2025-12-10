@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ShortUrl {
+  id          Int      @id @default(autoincrement())
+  originalUrl String
+  shortCode   String   @unique
+  clicks      Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime?
+
+  @@index([shortCode])
+  @@map("short_url")
+}
