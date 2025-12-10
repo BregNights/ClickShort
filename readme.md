@@ -1,13 +1,13 @@
 ## Regras de Negócio
-1- [] Cada URL original deve gerar um código curto único.
+1- [ ] Cada URL original deve gerar um código curto único.
 
-2- [] O link encurtado deve redirecionar para a URL original.
+2- [ ] O link encurtado deve redirecionar para a URL original.
 
-3- [] URLs inválidas não podem ser encurtadas (O sistema precisa validar se a URL informada é válida, formato e protocolo http/https).
+3- [ ] URLs inválidas não podem ser encurtadas (O sistema precisa validar se a URL informada é válida, formato e protocolo http/https).
 
-4- [] O link expira depois de algum tempo.
+4- [ ] O link expira depois de algum tempo.
 
-5- [] Registro de acessos (Cada clique no link curto deve registrar data/hora do acesso).
+5- [ ] Registro de acessos (Cada clique no link curto deve registrar data/hora do acesso).
 
 ## Requisitos do Sistema
 #### Criar link encurtado
