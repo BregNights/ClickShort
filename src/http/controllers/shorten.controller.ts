@@ -1,6 +1,7 @@
 import { makeUrlShortenUseCase } from "@/use-cases/factories/make-url-shorten-use-case"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
+import { ShortUrlPresenter } from "../presenters/shorten-url-presenter"
 
 export async function ShortenUrlController(
   request: FastifyRequest,
@@ -14,7 +15,9 @@ export async function ShortenUrlController(
 
   const shortenCode = makeUrlShortenUseCase()
 
-  const result = await shortenCode.execute({ originalUrl })
+  const { result } = await shortenCode.execute({ originalUrl })
 
-  reply.status(201).send({ message: result })
+  reply
+    .status(201)
+    .send(ShortUrlPresenter.toHTTP(result.shortCode, originalUrl))
 }
