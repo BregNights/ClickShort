@@ -1,21 +1,22 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
+  previewFeatures = ["schemaEngineDriverAdapters"]
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model ShortUrl {
+model ShortCode {
   id          Int      @id @default(autoincrement())
   originalUrl String
   shortCode   String   @unique
   clicks      Int      @default(0)
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
-  expiresAt   DateTime?
 
   @@index([shortCode])
-  @@map("short_url")
+  @@map("short_code")
 }
