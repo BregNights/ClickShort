@@ -15,7 +15,6 @@ export class InMemoryShortUrlRepository implements ShortCodeRepository {
       clicks: data.clicks ?? 0,
       active: data.active ?? true,
       createdAt: new Date(),
-      expiresAt: new Date(),
     }
     this.items.push(code)
 
@@ -32,9 +31,17 @@ export class InMemoryShortUrlRepository implements ShortCodeRepository {
       shortCode: code,
     }
 
-    const index = this.items.findIndex((i) => i.id === id)
+    const index = this.items.findIndex((item) => item.id === id)
     this.items[index] = updated
 
     return updated
+  }
+
+  async findbyShortCode(shortCode: string): Promise<ShortCode | null> {
+    const code = this.items.find((item) => {
+      return item.shortCode === shortCode
+    })
+
+    return code || null
   }
 }
