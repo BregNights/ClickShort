@@ -1,17 +1,20 @@
-// import { FastifyReply, FastifyRequest } from "fastify"
-// import { z } from "zod"
+import { makeUrlShortenUseCase } from "@/use-cases/factories/make-url-shorten-use-case"
+import { FastifyReply, FastifyRequest } from "fastify"
+import { z } from "zod"
 
-// export async function shortenUrl(request: FastifyRequest, reply: FastifyReply) {
-//   const shortenUrlBodySchema = z.object({
-//     url: z.url(),
-//   })
-//   const { url } = shortenUrlBodySchema.parse(request.body)
+export async function ShortenUrlController(
+  request: FastifyRequest,
+  reply: FastifyReply
+) {
+  const shortenUrlBodySchema = z.object({
+    originalUrl: z.url(),
+  })
 
-//   console.log(url)
+  const { originalUrl } = shortenUrlBodySchema.parse(request.body)
 
-//   reply.status(201).send({ message: "ok" })
-// }
+  const shortenCode = makeUrlShortenUseCase()
 
-// export class ShortenUrl {
-//   constructor(private shortenUrl: ShortenUrlUseCase) {}
-// }
+  const result = await shortenCode.execute({ originalUrl })
+
+  reply.status(201).send({ message: result })
+}
