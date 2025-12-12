@@ -18,4 +18,10 @@ export class PrismaShortCodeRepository implements ShortCodeRepository {
 
     return updateCode
   }
+
+  async findbyShortCode(shortCode: string): Promise<ShortCode | null> {
+    const code = await prisma.shortCode.findUnique({ where: { shortCode } })
+
+    return code
+  }
 }
