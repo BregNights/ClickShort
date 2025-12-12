@@ -1,9 +1,9 @@
-import { PrismaShortCodeRepository } from "@/repositories/prisma/prisma-short-code-repository";
-import { ShortenUrlUseCase } from "../shorten-url";
+import { PrismaShortCodeRepository } from "@/repositories/prisma/prisma-short-code-repository"
+import { ShortenUrlUseCase } from "../shorten-url"
 
 export function makeUrlShortenUseCase() {
-  const ShortCodeRepository = new PrismaShortCodeRepository();
-  const useCase = new ShortenUrlUseCase(ShortCodeRepository);
+  const ShortCodeRepository = new PrismaShortCodeRepository()
+  const useCase = new ShortenUrlUseCase(ShortCodeRepository)
 
-  return useCase;
+  return useCase
 }
