@@ -1,23 +1,21 @@
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import request from "supertest";
-import { app } from "@/app";
-
-
+import { app } from "@/app"
+import request from "supertest"
+import { afterAll, beforeAll, describe, expect, it } from "vitest"
 
 describe("Register User (e2e)", () => {
   beforeAll(async () => {
-    await app.ready();
-  });
+    await app.ready()
+  })
 
   afterAll(async () => {
-    await app.close();
-  });
+    await app.close()
+  })
 
   it("[POST] /", async () => {
     const response = await request(app.server).post("/").send({
-      originalUrl:"https://www.google.com/"
-    });
+      originalUrl: "https://www.google.com/",
+    })
 
-    expect(response.statusCode).toEqual(201);
-  });
-});
+    expect(response.statusCode).toEqual(201)
+  })
+})
