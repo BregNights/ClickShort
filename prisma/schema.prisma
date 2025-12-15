@@ -1,12 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
-  previewFeatures = ["schemaEngineDriverAdapters"]
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
-  // url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model ShortCode {
