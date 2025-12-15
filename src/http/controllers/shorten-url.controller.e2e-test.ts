@@ -1,6 +1,5 @@
 import { app } from "@/app"
 import request from "supertest"
-import { afterAll, beforeAll, describe, expect, it } from "vitest"
 
 describe("Shorten Url (e2e)", () => {
   beforeAll(async () => {

@@ -1,7 +1,6 @@
 import { app } from "@/app"
 import request from "supertest"
 import { makeShortUrl } from "test/factories/make-short-url"
-import { afterAll, beforeAll, describe, it } from "vitest"
 
 describe("Redirect to site (e2e)", () => {
   beforeAll(async () => {
