@@ -2,8 +2,8 @@ import { PrismaShortCodeRepository } from "@/repositories/prisma/prisma-short-co
 import { RedirectShortCodeUseCase } from "../redirect-short-code"
 
 export function makeRedirectOriginalUrlUseCase() {
-  const ShortCodeRepository = new PrismaShortCodeRepository()
-  const useCase = new RedirectShortCodeUseCase(ShortCodeRepository)
+  const shortCodeRepository = new PrismaShortCodeRepository()
+  const useCase = new RedirectShortCodeUseCase(shortCodeRepository)
 
   return useCase
 }
