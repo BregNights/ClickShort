@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE "public"."short_code" DROP COLUMN "expiresAt";
+ALTER TABLE "short_code" DROP COLUMN "expiresAt";
