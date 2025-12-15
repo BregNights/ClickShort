@@ -2,8 +2,8 @@ import { PrismaShortCodeRepository } from "@/repositories/prisma/prisma-short-co
 import { ShortenUrlUseCase } from "../shorten-url"
 
 export function makeUrlShortenUseCase() {
-  const ShortCodeRepository = new PrismaShortCodeRepository()
-  const useCase = new ShortenUrlUseCase(ShortCodeRepository)
+  const shortCodeRepository = new PrismaShortCodeRepository()
+  const useCase = new ShortenUrlUseCase(shortCodeRepository)
 
   return useCase
 }
