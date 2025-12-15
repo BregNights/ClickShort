@@ -1,29 +1,30 @@
 import { InMemoryShortUrlRepository } from "@/repositories/in-memory/in-memory-short-code-repository"
-import { GetShortenUrlUseCase } from "./get-shorten-url"
+import { RedirectShortCodeUseCase } from "./redirect-short-code"
 
 let inMemoryShorUrlRepository: InMemoryShortUrlRepository
-let sut: GetShortenUrlUseCase
+let sut: RedirectShortCodeUseCase
 
-describe("Get Shorten URL Use Case", () => {
+describe("redirect Short Code Use Case", () => {
   beforeEach(() => {
     inMemoryShorUrlRepository = new InMemoryShortUrlRepository()
-    sut = new GetShortenUrlUseCase(inMemoryShorUrlRepository)
+    sut = new RedirectShortCodeUseCase(inMemoryShorUrlRepository)
   })
 
-  it("should be able to get a shorten url", async () => {
+  it("should be able to redirect a shorten url", async () => {
     await inMemoryShorUrlRepository.create({
       originalUrl: "https://www.google.com.br",
       shortCode: "123",
     })
 
     const result = await sut.execute({
-      shortUrl: "123",
+      shortCode: "123",
     })
 
     expect(result).toMatchObject({
-      url: expect.objectContaining({
+      code: expect.objectContaining({
         originalUrl: "https://www.google.com.br",
         shortCode: "123",
+        clicks: 1,
       }),
     })
   })

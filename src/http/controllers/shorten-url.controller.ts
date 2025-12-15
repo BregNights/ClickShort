@@ -8,14 +8,16 @@ export async function ShortenUrlController(
   reply: FastifyReply
 ) {
   const shortenUrlBodySchema = z.object({
-    originalUrl: z.url(),
+    originalUrl: z
+      .url()
+      .refine((url) => url.startsWith("http://") || url.startsWith("https://")),
   })
 
   const { originalUrl } = shortenUrlBodySchema.parse(request.body)
 
-  const shortenCode = makeUrlShortenUseCase()
+  const useCase = makeUrlShortenUseCase()
 
-  const { result } = await shortenCode.execute({ originalUrl })
+  const { result } = await useCase.execute({ originalUrl })
 
   reply
     .status(201)

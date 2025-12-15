@@ -22,19 +22,12 @@ export class InMemoryShortUrlRepository implements ShortCodeRepository {
   }
 
   async updateShortCode(id: number, code: string): Promise<ShortCode> {
-    const shortUrl = this.items.find((item) => item.id === id)
+    const shortCode = this.items.find((item) => item.id === id)
+    if (!shortCode) throw new Error(`ShortUrl with id ${id} not found`)
 
-    if (!shortUrl) throw new Error(`ShortUrl with id ${id} not found`)
+    shortCode.shortCode = code
 
-    const updated: ShortCode = {
-      ...shortUrl,
-      shortCode: code,
-    }
-
-    const index = this.items.findIndex((item) => item.id === id)
-    this.items[index] = updated
-
-    return updated
+    return shortCode
   }
 
   async findbyShortCode(shortCode: string): Promise<ShortCode | null> {
@@ -43,5 +36,12 @@ export class InMemoryShortUrlRepository implements ShortCodeRepository {
     })
 
     return code || null
+  }
+
+  async incrementClicks(id: number): Promise<void> {
+    const code = this.items.find((item) => item.id === id)
+    if (!code) throw new Error(`ShortUrl with id ${id} not found`)
+
+    code.clicks += 1
   }
 }

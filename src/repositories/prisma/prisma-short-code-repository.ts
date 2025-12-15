@@ -24,4 +24,11 @@ export class PrismaShortCodeRepository implements ShortCodeRepository {
 
     return code
   }
+
+  async incrementClicks(id: number): Promise<void> {
+    await prisma.shortCode.update({
+      where: { id },
+      data: { clicks: { increment: 1 } },
+    })
+  }
 }

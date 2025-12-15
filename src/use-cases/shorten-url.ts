@@ -1,3 +1,4 @@
+import { env } from "@/env"
 import { ShortCodeRepository } from "@/repositories/short-code-repository"
 import { ShortCode } from "generated/prisma/client"
 import Hashids from "hashids"
@@ -23,7 +24,7 @@ export class ShortenUrlUseCase {
 
     const alphabet =
       "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    const hashids = new Hashids(process.env.SECRET_HASH, 8, alphabet)
+    const hashids = new Hashids(env.SECRET_HASH, 8, alphabet)
 
     const code = hashids.encode(created.id)
 
