@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch index.ts",
-    "test": "vitest run"
+    "dev": "tsx watch ./src/index.ts",
+    "test": "vitest run",
+    "test:e2e": "vitest run --config ./vitest.config.e2e.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,10 +23,15 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.2",
+    "@types/supertest": "^6.0.3",
+    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/ui": "^4.0.15",
     "prisma": "6.16.2",
+    "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
+    "vite": "^7.3.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.15"
   }
