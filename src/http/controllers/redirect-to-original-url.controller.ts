@@ -6,7 +6,6 @@ export async function redirectToOriginalUrlController(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  console.log(request.params)
   const codeParamSchema = z.object({ shortCode: z.string() })
 
   const { shortCode } = codeParamSchema.parse(request.params)

@@ -10,12 +10,16 @@ describe("Shorten URL Use Case", () => {
     sut = new ShortenUrlUseCase(inMemoryShorUrlRepository)
   })
 
-  it("should be able to shorten a url", async () => {
+  it("should generate a short code for a valid url", async () => {
     const { result } = await sut.execute({
-      originalUrl: "www.google.com.br",
+      originalUrl: "https://www.google.com.br",
     })
 
     expect(result.shortCode).toEqual(expect.any(String))
     expect(result.shortCode).toMatch(/^[0-9a-zA-Z]{8}$/)
+    expect(inMemoryShorUrlRepository.items[0].originalUrl).toBe(
+      result.originalUrl
+    )
+    expect(inMemoryShorUrlRepository.items[0].shortCode).toBe(result.shortCode)
   })
 })

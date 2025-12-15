@@ -5,4 +5,5 @@ export interface ShortCodeRepository {
   updateShortCode(id: number, code: string): Promise<ShortCode>
   findbyShortCode(shortCode: string): Promise<ShortCode | null>
   incrementClicks(id: number): Promise<void>
+  deleteExpired(createdBefore: Date): Promise<number>
 }

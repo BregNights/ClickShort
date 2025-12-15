@@ -31,4 +31,16 @@ export class PrismaShortCodeRepository implements ShortCodeRepository {
       data: { clicks: { increment: 1 } },
     })
   }
+
+  async deleteExpired(createdBefore: Date): Promise<number> {
+    const result = await prisma.shortCode.deleteMany({
+      where: {
+        createdAt: {
+          lt: createdBefore,
+        },
+      },
+    })
+
+    return result.count
+  }
 }

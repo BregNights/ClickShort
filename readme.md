@@ -6,7 +6,7 @@
 
 3- [X] URLs inválidas não podem ser encurtadas (O sistema precisa validar se a URL informada é válida, formato e protocolo http/https).
 
-4- [ ] O link expira depois de algum tempo.
+4- [X] O link expira depois de algum tempo.
 
 ## Requisitos do Sistema
 
@@ -36,23 +36,15 @@ Não permite salvar URLs mal-formadas.
 
 ### Registrar estatísticas de acesso
 
-Data/hora.
-
 Contador total.
 
 ### Consultar métricas detalhadas
-
-Acessos por data.
 
 Número total de cliques.
 
 ### Deletar link encurtado
 
-Remove o link ou marca como inativo.
-
-### Expiração opcional
-
-Se existir data de expiração, bloquear o link após o prazo.
+Remove o link após um período de tempo.
 
 ## Requisitos Não Funcionais
 
@@ -63,8 +55,6 @@ Redirecionamento deve ser rápido (ideal < 50ms).
 ### Código curto amigável
 
 Deve ter entre 5 e 10 caracteres.
-
-Pode ser numérico, alfanumérico ou base62.
 
 ### RNF03 — Persistência
 

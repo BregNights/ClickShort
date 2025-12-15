@@ -14,7 +14,7 @@ export class InMemoryShortUrlRepository implements ShortCodeRepository {
       shortCode: data.shortCode ?? null,
       clicks: data.clicks ?? 0,
       active: data.active ?? true,
-      createdAt: new Date(),
+      createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
     }
     this.items.push(code)
 
@@ -43,5 +43,15 @@ export class InMemoryShortUrlRepository implements ShortCodeRepository {
     if (!code) throw new Error(`ShortUrl with id ${id} not found`)
 
     code.clicks += 1
+  }
+
+  async deleteExpired(createdBefore: Date): Promise<number> {
+    const expiredCodes = this.items.filter(
+      (item) => item.createdAt < createdBefore
+    )
+
+    this.items = this.items.filter((item) => item.createdAt >= createdBefore)
+
+    return expiredCodes.length
   }
 }
