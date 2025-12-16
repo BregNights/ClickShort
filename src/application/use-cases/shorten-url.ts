@@ -1,7 +1,7 @@
 import { ShortCodeRepository } from "@/infra/repositories/short-code-repository"
 import { ShortCode } from "generated/prisma/client"
 import { randomUUID } from "node:crypto"
-import { CodeGenerator } from "./code-generator"
+import { hashCodeGenerator } from "../utils/hash-code-generator"
 
 interface ShortenUrlRequest {
   originalUrl: string
@@ -24,7 +24,7 @@ export class ShortenUrlUseCase {
       shortCode,
     })
 
-    const code = await CodeGenerator(created.id)
+    const code = hashCodeGenerator(created.id)
 
     const updated = await this.shortCodeRepository.updateShortCode(
       created.id,
