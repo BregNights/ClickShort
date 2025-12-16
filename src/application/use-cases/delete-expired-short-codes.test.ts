@@ -1,4 +1,4 @@
-import { InMemoryShortUrlRepository } from "@/repositories/in-memory/in-memory-short-code-repository"
+import { InMemoryShortUrlRepository } from "@/infra/repositories/in-memory/in-memory-short-code-repository"
 import { DeleteExpiredShortCodesUseCase } from "./delete-expired-short-codes"
 
 let inMemoryShorUrlRepository: InMemoryShortUrlRepository

@@ -1,4 +1,4 @@
-import { makeRedirectOriginalUrlUseCase } from "@/use-cases/factories/make-redirect-original-url-use-case"
+import { makeRedirectOriginalUrlUseCase } from "@/application/factories/make-redirect-original-url-use-case"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 

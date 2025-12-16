@@ -1,4 +1,4 @@
-import { makeUrlShortenUseCase } from "@/use-cases/factories/make-url-shorten-use-case"
+import { makeUrlShortenUseCase } from "@/application/factories/make-url-shorten-use-case"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 import { ShortUrlPresenter } from "../presenters/shorten-url-presenter"

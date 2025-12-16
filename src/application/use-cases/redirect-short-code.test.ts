@@ -1,4 +1,4 @@
-import { InMemoryShortUrlRepository } from "@/repositories/in-memory/in-memory-short-code-repository"
+import { InMemoryShortUrlRepository } from "@/infra/repositories/in-memory/in-memory-short-code-repository"
 import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 import { RedirectShortCodeUseCase } from "./redirect-short-code"
 
@@ -38,8 +38,8 @@ describe("redirect Short Code Use Case", () => {
   })
 
   it("should throw if short code does not exist", async () => {
-    await expect(
-      sut.execute({ shortCode: "321" })
-    ).rejects.toBeInstanceOf(ResourceNotFoundError)
+    await expect(sut.execute({ shortCode: "321" })).rejects.toBeInstanceOf(
+      ResourceNotFoundError
+    )
   })
 })

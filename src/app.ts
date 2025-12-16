@@ -1,6 +1,6 @@
-import { registerDeleteExpiredShortCodesJob } from "@/jobs/delete-expired-short-codes.job"
 import fastify from "fastify"
-import { clickShort } from "./http/routes/click-short.routes"
+import { clickShort } from "./infra/http/routes/click-short.routes"
+import { registerDeleteExpiredShortCodesJob } from "./infra/jobs/delete-expired-short-codes.job"
 
 export const app = fastify()
 

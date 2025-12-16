@@ -1,4 +1,4 @@
-import { ShortCodeRepository } from "../repositories/short-code-repository"
+import { ShortCodeRepository } from "../infra/repositories/short-code-repository"
 
 export class DeleteExpiredShortCodesUseCase {
   constructor(private shortCodeRepository: ShortCodeRepository) {}

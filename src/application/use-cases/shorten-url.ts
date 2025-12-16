@@ -1,7 +1,7 @@
-import { env } from "@/env"
-import { ShortCodeRepository } from "@/repositories/short-code-repository"
+import { ShortCodeRepository } from "@/infra/repositories/short-code-repository"
 import { ShortCode } from "generated/prisma/client"
-import Hashids from "hashids"
+import { randomUUID } from "node:crypto"
+import { CodeGenerator } from "./code-generator"
 
 interface ShortenUrlRequest {
   originalUrl: string
@@ -17,16 +17,14 @@ export class ShortenUrlUseCase {
   async execute({
     originalUrl,
   }: ShortenUrlRequest): Promise<ShortenUrlResponse> {
+    const shortCode = randomUUID().slice(0, 8)
+
     const created = await this.shortCodeRepository.create({
       originalUrl,
-      shortCode: "1",
+      shortCode,
     })
 
-    const alphabet =
-      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    const hashids = new Hashids(env.SECRET_HASH, 8, alphabet)
-
-    const code = hashids.encode(created.id)
+    const code = await CodeGenerator(created.id)
 
     const updated = await this.shortCodeRepository.updateShortCode(
       created.id,

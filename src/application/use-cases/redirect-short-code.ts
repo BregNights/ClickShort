@@ -1,4 +1,4 @@
-import { ShortCodeRepository } from "@/repositories/short-code-repository"
+import { ShortCodeRepository } from "@/infra/repositories/short-code-repository"
 import { ShortCode } from "generated/prisma/client"
 import { ResourceNotFoundError } from "./errors/resource-not-found-error"
 

@@ -1,9 +1,10 @@
-import { PrismaShortCodeRepository } from "@/repositories/prisma/prisma-short-code-repository"
+import { DeleteExpiredShortCodesUseCase } from "@/application/use-cases/delete-expired-short-codes"
+import { prisma } from "@/infra/database/prisma"
+import { PrismaShortCodeRepository } from "@/infra/repositories/prisma/prisma-short-code-repository"
 import cron from "node-cron"
-import { DeleteExpiredShortCodesUseCase } from "../use-cases/delete-expired-short-codes"
 
 export function registerDeleteExpiredShortCodesJob() {
-  const shortCodeRepository = new PrismaShortCodeRepository()
+  const shortCodeRepository = new PrismaShortCodeRepository(prisma)
   const useCase = new DeleteExpiredShortCodesUseCase(shortCodeRepository)
 
   cron.schedule("0 3 * * *", async () => {

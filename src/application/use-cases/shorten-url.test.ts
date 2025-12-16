@@ -1,4 +1,4 @@
-import { InMemoryShortUrlRepository } from "@/repositories/in-memory/in-memory-short-code-repository"
+import { InMemoryShortUrlRepository } from "@/infra/repositories/in-memory/in-memory-short-code-repository"
 import { ShortenUrlUseCase } from "./shorten-url"
 
 let inMemoryShorUrlRepository: InMemoryShortUrlRepository
