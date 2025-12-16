@@ -1,10 +1,11 @@
 import { PrismaService } from "@/infra/database/prisma/prisma-service"
 import { ShortCode } from "generated/prisma/client"
 import { randomUUID } from "node:crypto"
+import { CacheRepository } from "../redis/cache-repository"
 import { CreateShortCode, ShortCodeRepository } from "../short-code-repository"
 
 export class PrismaShortCodeRepository implements ShortCodeRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private cache: CacheRepository) {}
 
   async create(data: CreateShortCode): Promise<ShortCode> {
     const shortCode = await this.prisma.shortCode.create({
@@ -26,11 +27,22 @@ export class PrismaShortCodeRepository implements ShortCodeRepository {
   }
 
   async findbyShortCode(shortCode: string): Promise<ShortCode | null> {
+    const cacheKey = `short-code:${shortCode}`
+
+    const cached = await this.cache.get<ShortCode>(cacheKey)
+    if (cached) {
+      return cached
+    }
+
     const code = await this.prisma.shortCode.findUnique({
       where: { shortCode },
     })
 
-    return code || null
+    if (!code) return null
+
+    await this.cache.set(cacheKey, code, 300)
+
+    return code
   }
 
   async incrementClicks(id: number): Promise<void> {

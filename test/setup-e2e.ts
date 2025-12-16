@@ -1,17 +1,19 @@
 import { config } from "dotenv"
 import { PrismaClient } from "generated/prisma"
+import Redis from "ioredis"
 import { execSync } from "node:child_process"
 import { randomUUID } from "node:crypto"
 import { env } from "../src/env"
 
 config({ path: ".env", override: true })
+config({ path: ".env.test", override: true })
 
 const prisma = new PrismaClient()
-// const redis = new Redis({
-//   host: env.REDIS_HOST,
-//   port: env.REDIS_PORT,
-//   db: env.REDIS_DB,
-// })
+const redis = new Redis({
+  host: env.REDIS_HOST,
+  port: env.REDIS_PORT,
+  db: env.REDIS_DB,
+})
 
 function generateUniqueDatabaseURL(schemaId: string) {
   if (!env.DATABASE_URL) {
@@ -32,7 +34,7 @@ beforeAll(async () => {
 
   process.env.DATABASE_URL = databaseURL
 
-  // await redis.flushdb()
+  await redis.flushdb()
   execSync("pnpm prisma migrate deploy")
 })
 
