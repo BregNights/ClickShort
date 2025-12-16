@@ -30,7 +30,7 @@ export class PrismaShortCodeRepository implements ShortCodeRepository {
       where: { shortCode },
     })
 
-    return code
+    return code || null
   }
 
   async incrementClicks(id: number): Promise<void> {
