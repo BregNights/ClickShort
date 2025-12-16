@@ -11,7 +11,7 @@ export class PrismaShortCodeRepository implements ShortCodeRepository {
     const shortCode = await this.prisma.shortCode.create({
       data: {
         originalUrl: data.originalUrl,
-        shortCode: randomUUID(),
+        shortCode: data.shortCode ?? randomUUID(),
       },
     })
     return shortCode
