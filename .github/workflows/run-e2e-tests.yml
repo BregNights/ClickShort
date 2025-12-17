@@ -45,6 +45,6 @@ jobs:
       - name: Generate Prisma Client
         run: pnpm prisma generate
 
-      - name: Run unit tests
+      - name: Run e2e tests
         run: pnpm run test:e2e
         
