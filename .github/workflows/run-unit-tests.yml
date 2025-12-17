@@ -10,18 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
         with:
           node-version: 20
           cache: "pnpm"
 
-      - name: Enable corepack
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.19.0 --activate
-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Run unit tests
         run: pnpm run test
