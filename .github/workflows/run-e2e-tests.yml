@@ -11,9 +11,6 @@ jobs:
     env:
       SECRET_HASH: testing
       DATABASE_URL: "postgresql://postgres:docker@localhost:5432/click-short?schema=public"
-      REDIS_HOST: 127.0.0.1
-      REDIS_PORT: 6379
-      REDIS_DB: 0
 
     services:
       postgres:
