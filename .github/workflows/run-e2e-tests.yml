@@ -8,6 +8,10 @@ jobs:
     name: Run E2E Tests
     runs-on: ubuntu-latest
 
+    env:
+      SECRET_HASH: testing
+      DATABASE_URL: "postgresql://postgres:docker@localhost:5432/click-short?schema=public"
+
     services:
       postgres:
         image: postgres:16
@@ -43,7 +47,4 @@ jobs:
 
       - name: Run unit tests
         run: pnpm run test:e2e
-
-        env:
-          SECRET_HASH: testing
-          DATABASE_URL: "postgresql://postgres:docker@localhost:5432/click-short?schema=public"
+        
