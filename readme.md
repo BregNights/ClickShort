@@ -1,65 +1,86 @@
-## Regras de Negócio
+# ClickShort
 
-1- [X] Cada URL original deve gerar um código curto único.
+ClickShort é uma API de encurtador de URLs desenvolvida com foco em boas práticas de arquitetura, testabilidade e escala, utilizando Node.js, Fastify, Prisma, PostgreSQL e Redis.
 
-2- [X] O link encurtado deve redirecionar para a URL original.
+O projeto foi pensado para demonstrar domínio em back-end moderno, incluindo cache, testes E2E, CI/CD e separação clara de responsabilidades.
 
-3- [X] URLs inválidas não podem ser encurtadas (O sistema precisa validar se a URL informada é válida, formato e protocolo http/https).
+## Funcionalidades
 
-4- [X] O link expira depois de algum tempo.
+Criar URLs encurtadas
 
-## Requisitos do Sistema
+Redirecionar para a URL original
 
-### Criar link encurtado
+Contabilizar cliques
 
-Recebe URL original.
+Cache de URLs mais acessadas com Redis
 
-Gera código curto.
+Testes unitários e E2E
 
-Salva no banco.
+### Tecnologias
 
-Retorna link encurtado final.
+Node.js 20
 
-### Redirecionar a partir do código
+Fastify
 
-Recebe /:codigo.
+Prisma ORM
 
-Busca a URL original.
+PostgreSQL
 
-Atualiza estatísticas.
+Redis
 
-Redireciona.
+Vitest
 
-### Validar URL informada
+GitHub Actions (CI)
 
-Não permite salvar URLs mal-formadas.
+## Endpoints
 
-### Registrar estatísticas de acesso
+POST /
+GET /:shortCode
 
-Contador total.
+### Configuração do ambiente
+#### Clonar o projeto
 
-### Consultar métricas detalhadas
+git clone https://github.com/seu-usuario/clickshort.git
 
-Número total de cliques.
+cd clickshort
 
-### Deletar link encurtado
+#### Instalar dependências
 
-Remove o link após um período de tempo.
+pnpm install
 
-## Requisitos Não Funcionais
+#### Variáveis de ambiente
 
-### Alta disponibilidade
+DATABASE_URL=postgresql://postgres:docker@localhost:5432/click-short?schema=public
+SECRET_HASH=dev
 
-Redirecionamento deve ser rápido (ideal < 50ms).
+### Testes
+#### Testes unitários
+pnpm test
+#### Testes E2E
+pnpm test:e2e
 
-### Código curto amigável
+### Os testes E2E utilizam:
 
-Deve ter entre 5 e 10 caracteres.
+PostgreSQL
 
-### RNF03 — Persistência
+Redis
 
-Banco deve garantir consulta rápida.
+Migrations automáticas
 
-### Escalabilidade
+Cada execução é isolada por schema.
 
-Redirecionamento deve suportar alto volume de requisições simultâneas.
+### Prisma
+#### Gerar client
+pnpm prisma generate
+#### Rodar migrations
+pnpm prisma migrate deploy
+
+### CI/CD
+
+#### O projeto possui GitHub Actions configurado para:
+
+Rodar testes unitários em push
+
+Rodar testes E2E em push
+
+Subir Postgres e Redis automaticamente
