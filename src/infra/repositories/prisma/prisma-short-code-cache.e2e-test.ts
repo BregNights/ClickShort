@@ -8,11 +8,12 @@ import { PrismaShortCodeRepository } from "./prisma-short-code-repository"
 describe("PrismaShortCodeRepository + Redis cache", () => {
   const redisCache = new RedisCacheRepository(redis)
   const shortCodeRepository = new PrismaShortCodeRepository(prisma, redisCache)
+  const random = randomUUID()
 
   it("should cache shortCode on first access", async () => {
     const code = await shortCodeRepository.create({
       originalUrl: "https://google.com",
-      shortCode: randomUUID(),
+      shortCode: random,
     })
 
     const result = await shortCodeRepository.findbyShortCode(code.shortCode)
@@ -24,9 +25,9 @@ describe("PrismaShortCodeRepository + Redis cache", () => {
   })
 
   it("should return cached value on subsequent calls", async () => {
-    await shortCodeRepository.findbyShortCode("abc123")
+    await shortCodeRepository.findbyShortCode(random)
 
-    const cached = await redis.get("short-code:abc123")
+    const cached = await redis.get(`short-code:${random}`)
     expect(cached).not.toBeNull()
   })
 })
