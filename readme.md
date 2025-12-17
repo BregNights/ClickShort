@@ -16,9 +16,9 @@ Cache de URLs mais acessadas com Redis
 
 Testes unitários e E2E
 
-### Tecnologias
+## Tecnologias
 
-Node.js 20
+Node.js
 
 Fastify
 
@@ -35,9 +35,10 @@ GitHub Actions (CI)
 ## Endpoints
 
 POST /
+
 GET /:shortCode
 
-### Configuração do ambiente
+## Configuração do ambiente
 #### Clonar o projeto
 
 git clone https://github.com/seu-usuario/clickshort.git
@@ -53,14 +54,13 @@ pnpm install
 DATABASE_URL=postgresql://postgres:docker@localhost:5432/click-short?schema=public
 SECRET_HASH=dev
 
-### Testes
+## Testes
 #### Testes unitários
 pnpm test
 #### Testes E2E
 pnpm test:e2e
 
 ### Os testes E2E utilizam:
-
 PostgreSQL
 
 Redis
@@ -69,16 +69,15 @@ Migrations automáticas
 
 Cada execução é isolada por schema.
 
-### Prisma
+## Prisma
 #### Gerar client
 pnpm prisma generate
 #### Rodar migrations
 pnpm prisma migrate deploy
 
-### CI/CD
+## CI/CD
 
 #### O projeto possui GitHub Actions configurado para:
-
 Rodar testes unitários em push
 
 Rodar testes E2E em push
