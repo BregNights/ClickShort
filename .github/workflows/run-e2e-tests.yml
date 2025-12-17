@@ -10,13 +10,13 @@ jobs:
 
     services:
       postgres:
-        image: postgres
+        image: postgres:16
         ports:
           - 5432:5432
         env:
-          POSTGRESQL_USERNAME: postgres
-          POSTGRESQL_PASSWORD: docker
-          POSTGRESQL_DATABASE: click-short-pg
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DB: click-short
 
       redis:
         image: redis:7
