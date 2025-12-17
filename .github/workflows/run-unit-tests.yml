@@ -21,3 +21,7 @@ jobs:
 
       - name: Run unit tests
         run: pnpm run test
+
+        env:
+          SECRET_HASH: testing
+          
