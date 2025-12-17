@@ -52,6 +52,7 @@ pnpm install
 #### Variáveis de ambiente
 
 DATABASE_URL=postgresql://postgres:docker@localhost:5432/click-short?schema=public
+
 SECRET_HASH=dev
 
 ## Testes
